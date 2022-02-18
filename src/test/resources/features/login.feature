@@ -57,11 +57,11 @@ Feature: Login Functionality
     Examples:
       | givenUsername | givenPassword |
       | employee51    | Employee123   |
-      | _Employee81   | Employee123   |
-      | Empl@yee61    | Employee123   |
-      |               | Employee123   |
-      | Employee71    | Employee_123  |
-      | Employee81    |               |
+#      | _Employee81   | Employee123   |
+#      | Empl@yee61    | Employee123   |
+#      |               | Employee123   |
+#      | Employee71    | Employee_123  |
+#      | Employee81    |               |
 
 
 
