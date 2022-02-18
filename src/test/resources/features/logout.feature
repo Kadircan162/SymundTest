@@ -1,3 +1,4 @@
+@SYMU-972
 Feature: Logout functionality
 
   Background:
