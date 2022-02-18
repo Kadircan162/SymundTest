@@ -9,11 +9,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.io.File;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 
 public class Driver {
@@ -39,6 +43,7 @@ public class Driver {
                     WebDriverManager.chromedriver().setup();
                     driverPool.set(new ChromeDriver(new ChromeOptions().setHeadless(true)));
                     break;
+
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     driverPool.set(new FirefoxDriver());
