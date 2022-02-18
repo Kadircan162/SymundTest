@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,38 +88,42 @@ public class LoginLogoutStepDefs {
         System.out.println("The user stays at the login page when trying to navigate back");
     }
 
-    Map<String,String> givenCredentials;
+    Map<String,String> givenCredentials = new HashMap<>();
 
-    @And("the user enters invalid username or password and click login button")
-    public void theUserEntersUsernameAndPassword(Map<String,String> givenCredentials) {
-        this.givenCredentials = givenCredentials;
-        System.out.println("givenCredentials.get(\"username\") = " + givenCredentials.get("givenUsername"));
-        System.out.println("givenCredentials.get(\"password\") = " + givenCredentials.get("givenPassword"));
+    @And("the user enters invalid username {string} or password {string} and click login button")
+    public void theUserEntersUsernameAndPassword(String givenUsername, String givenPassword) {
+//        this.givenCredentials = givenCredentials;
+//        System.out.println("givenCredentials.get(\"username\") = " + givenCredentials.get("givenUsername"));
+//        System.out.println("givenCredentials.get(\"password\") = " + givenCredentials.get("givenPassword"));
+//        LoginPage loginPage = new LoginPage();
+//        if(givenCredentials.get("givenUsername") != null || !givenCredentials.get("givenUsername").isEmpty()){
+//            loginPage.userInput.sendKeys(givenCredentials.get("givenUsername"));
+//            System.out.println("username sent");
+//        }
+//        if(givenCredentials.get("givenPassword") != null || !givenCredentials.get("givenPassword").isEmpty()){
+//            loginPage.passwordInput.sendKeys(givenCredentials.get("givenPassword"));
+//            System.out.println("password sent");
+//        }
+        givenCredentials.put("givenUsername", givenUsername);
+        givenCredentials.put("givenPassword", givenPassword);
         LoginPage loginPage = new LoginPage();
-        if(givenCredentials.get("givenUsername") != null || !givenCredentials.get("givenUsername").isEmpty()){
-            loginPage.userInput.sendKeys(givenCredentials.get("givenUsername"));
-            System.out.println("username sent");
-        }
-        if(givenCredentials.get("givenPassword") != null || !givenCredentials.get("givenPassword").isEmpty()){
-            loginPage.passwordInput.sendKeys(givenCredentials.get("givenPassword"));
-            System.out.println("password sent");
-        }
-
+        loginPage.userInput.sendKeys(givenUsername);
+        loginPage.passwordInput.sendKeys(givenPassword);
         loginPage.loginBtn.click();
-
     }
-    @Then("verify that the user cannot login with invalid credentials")
-    public void verifyThatTheUserCannotLogin_with_invalid_credentials(List<String> validCredentials) {
-        BrowserUtils.waitFor(2);
-        String actualLoginPageTitle = Driver.get().getTitle();
 
-        if(!validCredentials.contains(this.givenCredentials.get("givenUsername")) ||
-                !validCredentials.contains(this.givenCredentials.get("givenPassword"))){//that means given credentials are invalid
+    @Then("verify that the user cannot login with invalid credentials")
+    public void verifyThatTheUserCannotLogin_with_invalid_credentials(List<String> validCredentialsList) {
+        BrowserUtils.waitFor(1);
+
+        if(!validCredentialsList.contains(givenCredentials.get("givenUsername")) ||
+                !validCredentialsList.contains(givenCredentials.get("givenPassword"))){//that means given credentials are invalid
 
             String expectedLoginPageTitle = "Symund - QA";
+            String actualLoginPageTitle = Driver.get().getTitle();
             System.out.println("expectedLoginPageTitle = " + expectedLoginPageTitle);
             System.out.println("actualLoginPageTitle = " + actualLoginPageTitle);
-            System.out.println("this.givenCredentials = " + this.givenCredentials);
+            System.out.println("this.givenCredentials = " + givenCredentials);
             Assert.assertEquals("User is able to login with invalid credentials",expectedLoginPageTitle,actualLoginPageTitle);
 
         }

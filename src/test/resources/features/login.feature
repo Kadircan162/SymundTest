@@ -32,9 +32,9 @@ Feature: Login Functionality
   @SYMU-977 @setupAndTearDown
   Scenario Outline: the user cannot login with invalid credentials
     Given the user is on the login page
-    And the user enters invalid username or password and click login button
-      | givenUsername | <givenUsername> |
-      | givenPassword | <givenPassword> |
+    And the user enters invalid username "<givenUsername>" or password "<givenPassword>" and click login button
+#      | givenUsername | <givenUsername> |
+#      | givenPassword | <givenPassword> |
     Then verify that the user cannot login with invalid credentials
 #     validUsername
       | Employee11    |
