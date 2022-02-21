@@ -19,10 +19,6 @@ public class Hooks {
     @Before("@setupAndTearDown")
     public void setUp(){
        Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-       //Driver.get().get("chrome://settings/clearBrowserData");
-
-
-
     }
 
     @After("@setupAndTearDown")
