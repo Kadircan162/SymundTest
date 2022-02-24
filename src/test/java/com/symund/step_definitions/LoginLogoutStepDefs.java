@@ -147,4 +147,40 @@ public class LoginLogoutStepDefs {
         Assert.assertEquals("Placeholder is not displayed properly", expectedUserNamePlaceholder, actualUsernamePlaceholder);
         Assert.assertEquals("Placeholder is not displayed properly", expectedPasswordPlaceholder, actualPasswordPlaceholder);
     }
+
+    @Given("the user logged in with username {string} and password {string}")
+    public void theUserLoggedInWithUsernameAndPassword(String username, String password) {
+        Driver.get().get(ConfigurationReader.get("url"));
+        LoginPage loginPage = new LoginPage();
+        loginPage.userInput.sendKeys(username);
+        loginPage.passwordInput.sendKeys(password);
+        loginPage.loginBtn.click();
+    }
+
+    @Given("the user opens the user avatar and clicks on logout button")
+    public void theUserOpensTheUserAvatarAndClicksOnLogoutButton() {
+        new DashboardPage().userAvatar.click();
+        new DashboardPage().logoutBtn.click();
+    }
+
+    @And("verify that the user ends up in the login page")
+    public void verifyThatTheUserEndsUpInTheLoginPage() {
+        String expectedPageTitle = "Symund - QA";
+        String actualPageTitle = Driver.get().getTitle();
+        System.out.println("actualPageTitle = " + actualPageTitle);
+        Assert.assertEquals("User could not land on login page", expectedPageTitle,actualPageTitle);
+    }
+
+    @When("the user navigates back to the homepage")
+    public void theUserNavigatesBackToTheHomepage() {
+        BrowserUtils.waitFor(2);
+        Driver.get().navigate().back();
+    }
+
+    @Then("verify that user can not go to home page again after logged out")
+    public void verifyThatUserCanNotGoToHomePageAgainAfterLoggedOut() {
+        String expectedPageTitle = "Symund - QA";
+        String actualPageTitle = Driver.get().getTitle();
+        Assert.assertEquals("User can go back to the homepage",expectedPageTitle,actualPageTitle);
+    }
 }
