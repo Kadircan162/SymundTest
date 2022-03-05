@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    @Before("@setupAndTearDown")
+    @Before()
     public void setUp(){
        Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @After("@setupAndTearDown")
+    @After()
     public void tearDown(Scenario scenario){
         if(scenario.isFailed()){
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);

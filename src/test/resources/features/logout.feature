@@ -4,7 +4,7 @@ Feature: Logout functionality
   Background:
     Given the user logged in with username "Employee51" and password "Employee123"
 
-  @SYMU-970 @setupAndTearDown
+  @smoke @SYMU-970 @setupAndTearDown
   Scenario: the user can log out and ends up in log in page
     Given the user opens the user avatar and clicks on logout button
     And verify that the user ends up in the login page

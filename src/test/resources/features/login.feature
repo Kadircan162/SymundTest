@@ -1,6 +1,6 @@
 Feature: Login Functionality
 
-  @SYMU-962 @setupAndTearDown
+  @smoke @SYMU-962 @setupAndTearDown
   Scenario Outline: Verify that user can login with valid credentials
     Given the user is on the login page
     When the user enters valid "<username>" into username inputbox
@@ -14,7 +14,7 @@ Feature: Login Functionality
       | Employee81 | Employee123 |
       | Employee61 | Employee123 |
 
-  @SYMU-968 @setupAndTearDown
+  @smoke @SYMU-968 @setupAndTearDown
   Scenario Outline: Verify that user can login with valid credentials (Pushing enter button on keyboard)
     Given the user is on the login page
     When the user enters valid "<username>" into username inputbox
@@ -39,6 +39,7 @@ Feature: Login Functionality
     Examples:
       | givenUsername | givenPassword |
       | employee51    | Employee123   |
+#  bug found for username with first-letter-lowercase
 #      | _Employee81   | Employee123   |
 #      | Empl@yee61    | Employee123   |
 #      | Employee71    | Employee_123  |

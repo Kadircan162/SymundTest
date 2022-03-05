@@ -15,4 +15,8 @@ public abstract class BasePage {
 
     @FindBy(linkText = "Log out")
     public WebElement logoutBtn;
+
+    @FindBy(css = "ul[id='appmenu'] a[aria-label='Calendar']")
+    public WebElement calendarBtn;
+
 }
