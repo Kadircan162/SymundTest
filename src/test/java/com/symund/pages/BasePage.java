@@ -19,4 +19,10 @@ public abstract class BasePage {
     @FindBy(css = "ul[id='appmenu'] a[aria-label='Calendar']")
     public WebElement calendarBtn;
 
+    @FindBy(xpath = "(//*[@data-id='notes'])[1]")
+    public WebElement notesButtonHover;
+
+    @FindBy(partialLinkText = "Notes")
+    public WebElement notesBtn;
+
 }
